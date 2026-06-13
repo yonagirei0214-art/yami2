@@ -286,9 +286,8 @@
           <input type="text" class="preset-name-input" id="preset-name-input" placeholder="景品名を入力（例: おやすみ）" maxlength="100">
           <button class="preset-add-btn" onclick="addPresetItem()">＋ 追加</button>
         </div>
-        <div class="gift-list" id="preset-gift-list">
-          <p id="preset-empty-msg" style="font-size:12px;color:var(--text-muted);text-align:center;padding:12px 0;">景品がまだ登録されていません</p>
-        </div>
+        <p id="preset-empty-msg" style="font-size:12px;color:var(--text-muted);text-align:center;padding:12px 0;">景品がまだ登録されていません</p>
+        <div class="gift-list" id="preset-gift-list"></div>
       </div>
     </section>
 
@@ -479,14 +478,12 @@ function renderPresetList() {
   const el = document.getElementById('preset-gift-list');
   const empty = document.getElementById('preset-empty-msg');
   const keys = Object.keys(presetItems);
+  el.innerHTML = '';
   if (keys.length === 0) {
-    el.innerHTML = '';
-    el.appendChild(empty);
     empty.style.display = 'block';
     return;
   }
   empty.style.display = 'none';
-  el.innerHTML = '';
   for (const key of keys) {
     const info = presetItems[key];
     const item = document.createElement('div');
